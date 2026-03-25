@@ -15,9 +15,8 @@
             min-height: 100vh;
             color: #1e293b;
             overflow-x: hidden;
-            word-break: keep-all; /* 단어 단위 줄바꿈 보장 */
+            word-break: keep-all;
         }
-        /* 라이트 글래스모피즘 카드 스타일 */
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
@@ -26,14 +25,12 @@
             border-radius: 1.5rem;
             box-shadow: 0 10px 40px -10px rgba(31, 38, 135, 0.08);
         }
-        /* 미묘한 종이 질감 노이즈 오버레이 */
         .noise {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0.02; z-index: -1; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-        /* 4점 척도 선택 버튼 */
         .scale-btn {
             width: 48px; height: 48px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -42,32 +39,27 @@
             flex-shrink: 0;
         }
         @media (max-width: 480px) {
-            .scale-btn { width: 38px; height: 38px; font-size: 0.75rem; }
+            .scale-btn { width: 40px; height: 40px; font-size: 0.75rem; }
         }
         .scale-btn:hover { border-color: #3b82f6; color: #3b82f6; transform: scale(1.1); }
         .scale-btn.active { background: #3b82f6; border-color: #3b82f6; color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
         
-        /* 매트릭스 레이아웃 및 폰트 크기 극대화 */
         .matrix-wrapper { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: 40px 1fr; gap: 4px; }
         .matrix-header-x { grid-column: 2; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; font-weight: 900; color: #475569; font-size: 1.2rem; }
         .matrix-header-y { grid-row: 2; display: grid; grid-template-rows: repeat(4, 1fr); align-items: center; text-align: center; font-weight: 900; color: #475569; font-size: 1.2rem; }
         .matrix-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); background: #94a3b8; border: 4px solid #64748b; }
         .matrix-cell { background: white; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #f1f5f9; position: relative; padding: 4px; overflow: hidden; }
-        
-        /* 세부 유형 텍스트 가독성 (모바일에서는 조금 더 작게 하여 줄바꿈 방지) */
         .cell-label { font-size: 10px; font-weight: 900; color: #64748b; line-height: 1.1; text-align: center; pointer-events: none; word-break: keep-all; }
         @media (min-width: 640px) { .cell-label { font-size: 16px; } }
         
         .matrix-dot { width: 24px; height: 24px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 20px rgba(239, 68, 68, 1); position: absolute; z-index: 20; opacity: 0.7; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); opacity: 0.4; } 100% { transform: scale(1); } }
 
-        /* 진단 원리 테이블 스타일 */
         .principle-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
         .principle-table tr { background: #f8fafc; border-radius: 8px; }
         .principle-table td { padding: 10px 4px; text-align: center; font-size: 0.85rem; font-weight: 600; }
         .principle-table .header-label { background: #f1f5f9; color: #64748b; font-size: 0.75rem; font-weight: 800; }
 
-        /* 상세 도감 스타일 및 텍스트 최적화 */
         .style-card { border-left: 6px solid #e2e8f0; padding-left: 1.2rem; margin-bottom: 2.5rem; }
         .style-card h4 { font-size: 1.15rem; font-weight: 900; line-height: 1.2; white-space: nowrap; } 
         @media (min-width: 768px) { .style-card h4 { font-size: 1.5rem; } }
@@ -87,13 +79,14 @@
             <p id="sub-header" class="text-slate-500 font-bold tracking-widest uppercase text-[10px]">LEARN & INSIGHT Diagnostic System</p>
         </header>
 
-        <!-- 인트로 화면: 모바일 텍스트 줄바꿈 최적화 -->
+        <!-- 인트로 화면 -->
         <section id="intro-screen" class="glass-card p-6 md:p-12 text-center">
             <div class="mb-10 text-slate-700 space-y-10">
                 <p class="text-lg md:text-2xl font-bold leading-snug break-keep px-2">
                     "비즈니스 효율을 높이기 위해서는 구성원들이 각자의 특성을 존중하면서 상호 다른 부분을 보완해 가야 합니다."
                 </p>
-                <p class="text-sm md:text-base leading-relaxed text-slate-500 font-medium break-keep">
+                <!-- 모바일에서만 왼쪽 정렬 (text-left md:text-center) -->
+                <p class="text-sm md:text-base leading-relaxed text-slate-500 font-medium break-keep text-left md:text-center">
                     소셜 스타일 진단은 인간을 사회적 태도경향에 따라 유형화하고<br class="hidden md:block"> 그 차이 인식을 통해 대인관계의 향상을 시키는 데 도움을 줍니다.
                 </p>
             </div>
@@ -102,39 +95,43 @@
             </button>
         </section>
 
-        <!-- 진단 문항 화면 (좌-버튼-우 고정 레이아웃) -->
+        <!-- 진단 문항 화면 -->
         <section id="question-screen" class="hidden glass-card p-4 md:p-12">
             <div class="flex justify-between items-center mb-8">
                 <span id="progress-text" class="text-[10px] font-black text-blue-600 bg-blue-50 px-4 py-2 rounded-full uppercase">Question 1 / 18</span>
                 <div class="flex-1 mx-4 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.3)]" style="width: 0%"></div>
+                    <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300" style="width: 0%"></div>
                 </div>
             </div>
 
             <div id="question-container" class="py-14">
                 <div class="flex items-center justify-between w-full gap-1 md:gap-8">
-                    <!-- 좌측 텍스트 (오른쪽 정렬) -->
                     <div id="label-left" class="flex-1 text-right font-black text-slate-800 text-[0.85rem] md:text-2xl leading-tight"></div>
-                    
-                    <!-- 선택 버튼 그룹 -->
                     <div class="flex items-center gap-1.5 md:gap-3 p-1.5 bg-slate-100/80 rounded-full border border-slate-200 shrink-0">
                         <button onclick="selectOption(0)" id="btn-0" class="scale-btn"></button>
                         <button onclick="selectOption(1)" id="btn-1" class="scale-btn"></button>
                         <button onclick="selectOption(2)" id="btn-2" class="scale-btn"></button>
                         <button onclick="selectOption(3)" id="btn-3" class="scale-btn"></button>
                     </div>
-
-                    <!-- 우측 텍스트 (왼쪽 정렬) -->
                     <div id="label-right" class="flex-1 text-left font-black text-slate-800 text-[0.85rem] md:text-2xl leading-tight"></div>
                 </div>
             </div>
-            <p class="mt-8 text-center text-slate-400 text-[10px] font-bold italic tracking-tight uppercase">Choose the side that describes you better</p>
+            
+            <div class="flex flex-col items-center gap-6 mt-8">
+                <p class="text-slate-400 text-[10px] font-bold italic tracking-tight uppercase">Choose the side that describes you better</p>
+                <!-- 이전 문항 버튼 추가 -->
+                <button id="prev-btn" onclick="prevQuestion()" class="hidden text-slate-400 hover:text-slate-600 font-bold text-xs flex items-center gap-1 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    이전 문항으로
+                </button>
+            </div>
         </section>
 
         <!-- 결과 화면 -->
         <section id="result-screen" class="hidden space-y-8">
             <div class="glass-card p-6 md:p-10">
-                <!-- 요청하신 3줄 제목 구성 (가운데 정렬) -->
                 <h2 class="text-3xl md:text-4xl font-black text-slate-800 mb-10 text-center leading-tight tracking-tighter">
                     YOUR<br>SOCIAL STYLE<br>MATRIX
                 </h2>
@@ -160,13 +157,9 @@
                     </div>
                 </div>
 
-                <!-- 4x4 매트릭스 (축 라벨 정중앙 배치 최적화) -->
                 <div class="relative max-w-[340px] md:max-w-md mx-auto mb-20 px-12 md:px-14"> 
-                    <!-- 상단/하단 라벨 (정중앙) -->
                     <div class="absolute -top-7 left-0 right-0 text-center font-black text-slate-500 text-[10px] uppercase tracking-widest">과업 중심 (TASK Directed)</div>
                     <div class="absolute -bottom-7 left-0 right-0 text-center font-black text-slate-500 text-[10px] uppercase tracking-widest">사람 중심 (PEOPLE Directed)</div>
-                    
-                    <!-- 좌측/우측 라벨 (정중앙 수직 정렬) -->
                     <div class="absolute top-1/2 left-0 -translate-y-1/2 -rotate-90 font-black text-slate-500 text-[10px] uppercase tracking-widest whitespace-nowrap origin-center">질문 중심 (ASK)</div>
                     <div class="absolute top-1/2 right-0 -translate-y-1/2 rotate-90 font-black text-slate-500 text-[10px] uppercase tracking-widest whitespace-nowrap origin-center">발언 중심 (TELL)</div>
                     
@@ -240,16 +233,12 @@
                 </div>
             </div>
 
-            <!-- 상세 도감 (전체 텍스트 반영) -->
+            <!-- 상세 도감 -->
             <div class="glass-card p-8 md:p-12 space-y-12">
                 <h3 class="text-3xl font-black text-slate-800 text-center tracking-tighter">📘 소셜 스타일 상세 도감</h3>
                 
-                <!-- 분석형 -->
                 <div class="style-card analytical">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-lg font-black text-[10px] uppercase">Analyst</span>
-                        <h4 class="text-slate-800">분석형(질문x과업)</h4>
-                    </div>
+                    <div class="flex items-center gap-3 mb-4"><span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-lg font-black text-[10px] uppercase">Analyst</span><h4 class="text-slate-800">분석형(질문x과업)</h4></div>
                     <p class="text-blue-600 font-bold italic mb-6 text-sm">"어떻게 게임을 치르는가가 중요하다."</p>
                     <div class="text-slate-600 space-y-4">
                         <p class="font-bold text-slate-900 leading-snug">"정확성을 높이기 위해 사실을 중심으로 신중하고 분석적으로 일한다."</p>
@@ -265,12 +254,8 @@
                     </div>
                 </div>
 
-                <!-- 주도형 -->
                 <div class="style-card driving">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="px-2 py-1 bg-red-100 text-red-600 rounded-lg font-black text-[10px] uppercase">Controller</span>
-                        <h4 class="text-slate-800">주도형(과업x발언)</h4>
-                    </div>
+                    <div class="flex items-center gap-3 mb-4"><span class="px-2 py-1 bg-red-100 text-red-600 rounded-lg font-black text-[10px] uppercase">Controller</span><h4 class="text-slate-800">주도형(과업x발언)</h4></div>
                     <p class="text-red-600 font-bold italic mb-6 text-sm">"승리는 전부가 아니라 유일한 것일 뿐이다."</p>
                     <div class="text-slate-600 space-y-4">
                         <p class="font-bold text-slate-900 leading-snug">"목표달성과 승리는 선택이 아니라 필수이다!"</p>
@@ -286,12 +271,8 @@
                     </div>
                 </div>
 
-                <!-- 우호형 -->
                 <div class="style-card amiable">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="px-2 py-1 bg-emerald-100 text-emerald-600 rounded-lg font-black text-[10px] uppercase">Facilitator</span>
-                        <h4 class="text-slate-800">우호형(질문x사람)</h4>
-                    </div>
+                    <div class="flex items-center gap-3 mb-4"><span class="px-2 py-1 bg-emerald-100 text-emerald-600 rounded-lg font-black text-[10px] uppercase">Facilitator</span><h4 class="text-slate-800">우호형(질문x사람)</h4></div>
                     <p class="text-emerald-600 font-bold italic mb-6 text-sm">"팀워크와 우정이 결과보다 더욱 중요하다."</p>
                     <div class="text-slate-600 space-y-4">
                         <p class="font-bold text-slate-900 leading-snug">"협력을 통한 목표달성, 조화로운 인간관계 형성을 더욱 중요하게 생각한다."</p>
@@ -307,13 +288,9 @@
                     </div>
                 </div>
 
-                <!-- 표현형 -->
                 <div class="style-card expressive">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="px-2 py-1 bg-amber-100 text-amber-600 rounded-lg font-black text-[10px] uppercase">Talker</span>
-                        <h4 class="text-slate-800">표현형(사람x발언)</h4>
-                    </div>
-                    <p class="text-amber-600 font-bold italic mb-6 text-sm">"다른 사람이 나를 어떻게 보이는지가 행복과 절망의 기준이다."</p>
+                    <div class="flex items-center gap-3 mb-4"><span class="px-2 py-1 bg-amber-100 text-amber-600 rounded-lg font-black text-[10px] uppercase">Talker</span><h4 class="text-slate-800">표현형(사람x발언)</h4></div>
+                    <p class="text-amber-600 font-bold italic mb-6 text-sm">"다른 사람이 나를 어떻게 보이는지가 행복과 절망의 기준이 된다."</p>
                     <div class="text-slate-600 space-y-4">
                         <p class="font-bold text-slate-900 leading-snug">"다른 사람이 나를 어떻게 보이는지에 따라 행복과 절망의 기준이 된다."</p>
                         <ul class="list-disc list-inside space-y-2 text-sm font-medium">
@@ -367,7 +344,7 @@
         };
 
         let currentStep = 0;
-        let scores = { A: 0, B: 0, C: 0, D: 0, "1": 0, "2": 0, "3": 0, "4": 0 };
+        let userAnswers = new Array(questions.length).fill(null); // 답변 기록용 배열
 
         function startDiagnosis() {
             document.getElementById('intro-screen').classList.add('hidden');
@@ -380,19 +357,33 @@
             const q = questions[currentStep];
             document.getElementById('label-left').innerText = q.left;
             document.getElementById('label-right').innerText = q.right;
+            
+            // 이전 버튼 보이기/숨기기
+            const prevBtn = document.getElementById('prev-btn');
+            if (currentStep > 0) prevBtn.classList.remove('hidden');
+            else prevBtn.classList.add('hidden');
+
             q.options.forEach((opt, idx) => {
                 const btn = document.getElementById(`btn-${idx}`);
                 btn.innerText = opt;
-                btn.classList.remove('active');
+                // 이미 선택했던 답변이라면 하이라이트
+                if (userAnswers[currentStep] === opt) btn.classList.add('active');
+                else btn.classList.remove('active');
             });
+            
             const progress = ((currentStep + 1) / questions.length) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
             document.getElementById('progress-text').innerText = `Step 1. Question ${currentStep + 1} / ${questions.length}`;
         }
 
         function selectOption(index) {
-            scores[questions[currentStep].options[index]]++;
+            const opt = questions[currentStep].options[index];
+            userAnswers[currentStep] = opt; // 답변 저장
+
+            const btns = document.querySelectorAll('.scale-btn');
+            btns.forEach(b => b.classList.remove('active'));
             document.getElementById(`btn-${index}`).classList.add('active');
+
             setTimeout(() => {
                 if (currentStep < questions.length - 1) {
                     currentStep++;
@@ -403,11 +394,27 @@
             }, 150);
         }
 
+        function prevQuestion() {
+            if (currentStep > 0) {
+                currentStep--;
+                renderQuestion();
+            }
+        }
+
+        function calculateScores() {
+            const scores = { A: 0, B: 0, C: 0, D: 0, "1": 0, "2": 0, "3": 0, "4": 0 };
+            userAnswers.forEach(ans => {
+                if (ans) scores[ans]++;
+            });
+            return scores;
+        }
+
         function showResult() {
             document.getElementById('question-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
-            document.getElementById('sub-header').innerText = "분석이 완료되었습니다.";
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const scores = calculateScores();
 
             for (let key in scores) {
                 const el = document.getElementById(`count-${key}`);
@@ -449,7 +456,7 @@
 
             let html = "";
             if (detailedTypes.length > 1) {
-                html += `<div class="mb-6 p-4 bg-blue-500/20 border border-blue-400/30 rounded-2xl text-[11px] font-bold leading-relaxed text-blue-100 text-center tracking-tighter">⚠️ 약식진단 안내: 집계 결과 동점이 발생했습니다. 강사의 설명을 듣고 나에게 가장 가까운 유형을 최종 선택해 주시기 바랍니다.</div>`;
+                html += `<div class="mb-6 p-4 bg-blue-500/20 border border-blue-400/30 rounded-2xl text-[11px] leading-relaxed text-blue-100 font-bold text-center">⚠️ 약식진단 안내: 집계 결과 동점이 발생했습니다. 강사의 설명을 듣고 나에게 가장 가까운 유형을 최종 선택해 주시기 바랍니다.</div>`;
             }
 
             const typeNames = detailedTypes.map(t => t.name).join(" / ");
@@ -460,18 +467,18 @@
             if (firstCode.startsWith('D') || firstCode.startsWith('C')) {
                 if (firstCode.endsWith('1') || firstCode.endsWith('2')) {
                     category = "분석형 (Analytical)";
-                    desc = "논리와 데이터를 중시하며, 신중하고 정확한 업무 처리를 선호합니다. 상황을 객관적으로 분석하여 리스크를 최소화하는 데 강점이 있습니다.";
+                    desc = "논리와 데이터를 중시하며, 신중하고 정확한 업무 처리를 선호합니다.";
                 } else {
                     category = "우호형 (Amiable)";
-                    desc = "인간관계와 조화를 중시하며, 타인을 배려하고 협력적인 환경을 선호합니다. 경청과 공감을 통해 조직의 결속력을 높이는 데 기여합니다.";
+                    desc = "인간관계와 조화를 중시하며, 타인을 배려하고 협력적인 환경을 선호합니다.";
                 }
             } else {
                 if (firstCode.endsWith('1') || firstCode.endsWith('2')) {
                     category = "주도형 (Driving)";
-                    desc = "빠른 의사결정과 결과를 중시하며, 목표 달성을 위해 강한 추진력을 발휘합니다. 성과 창출을 위해 도전적인 리더십을 발휘하는 스타일입니다.";
+                    desc = "빠른 의사결정과 결과를 중시하며, 목표 달성을 위해 강한 추진력을 발휘합니다.";
                 } else {
                     category = "표현형 (Expressive)";
-                    desc = "열정적이고 사교적이며, 비전을 공유하고 사람들을 동기부여하는 데 강점이 있습니다. 창의적인 아이디어로 팀의 분위기를 활기차게 주도합니다.";
+                    desc = "열정적이고 사교적이며, 비전을 공유하고 사람들을 동기부여합니다.";
                 }
             }
             html += `<p class="text-slate-100 text-lg font-bold mb-1">${category}</p><p class="text-slate-400 leading-relaxed text-sm font-medium">${desc}</p>`;
